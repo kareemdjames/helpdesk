@@ -24,7 +24,7 @@ class Nav extends Component {
           <span className="navbar-toggler-icon" />
         </button>
         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div className="navbar-nav mr-auto">
+          <div className="navbar-nav">
             <Link className="nav-item nav-link active" to="/">
               Home
             </Link>
