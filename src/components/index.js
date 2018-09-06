@@ -1,4 +1,4 @@
-import Nav from "./nav/Nav";
-import AddTicketForm from "./add-ticket/AddTicketForm";
+import Nav from './nav/Nav';
+import AddTicket from './add-ticket/AddTicket';
 
-export { Nav, AddTicketForm };
+export { Nav, AddTicket };
