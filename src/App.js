@@ -1,12 +1,17 @@
-import React, { Component } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import { Nav, Header } from "./components/index";
+import React, { Component, Fragment } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Nav, AddTicketForm } from './components/index';
 
 class App extends Component {
   render() {
     return (
       <Router>
-        <Route path="/" component={Nav} />
+        <Fragment>
+          <Route path="/" component={Nav} />
+          <div className="container">
+            <Route path="/add-ticket" component={AddTicketForm} />
+          </div>
+        </Fragment>
       </Router>
     );
   }
