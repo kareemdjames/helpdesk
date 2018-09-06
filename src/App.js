@@ -3,6 +3,14 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Nav, AddTicket, ViewTickets } from './components/index';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      authenticated: false,
+      data: ''
+    };
+  }
+
   render() {
     return (
       <Router>
