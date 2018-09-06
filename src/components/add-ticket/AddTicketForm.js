@@ -1,6 +1,19 @@
 import React, { Component, Fragment } from 'react';
 
 class AddTicketForm extends Component {
+  constructor() {
+    super();
+    this.handlesubmitEvent = this.handlesubmitEvent.bind(this);
+  }
+
+  handlesubmitEvent(e) {
+    e.preventDefault();
+    console.log('Email--' + this.refs.email.value.trim());
+    console.log('Issue Type--' + this.refs.issueType.value.trim());
+    console.log('Department--' + this.refs.department.value.trim());
+    console.log('Comments--' + this.refs.comment.value.trim());
+  }
+
   render() {
     let style = { color: '#ffaaaa' };
     return (
@@ -8,7 +21,7 @@ class AddTicketForm extends Component {
         <br />
         <h2>Add Ticket</h2>
         <hr />
-        <form>
+        <form onSubmit={this.handlesubmitEvent}>
           <div className="form-group">
             <label htmlFor="email">
               Email <span style={style}>*</span>
