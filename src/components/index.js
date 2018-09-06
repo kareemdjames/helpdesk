@@ -1,4 +1,4 @@
 import Nav from "./nav/Nav";
-import Header from "./nav/Header";
+import AddTicketForm from "./add-ticket/AddTicketForm";
 
-export { Nav, Header };
+export { Nav, AddTicketForm };
