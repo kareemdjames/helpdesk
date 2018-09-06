@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { Nav, AddTicketForm } from './components/index';
+import { Nav, AddTicket } from './components/index';
 
 class App extends Component {
   render() {
@@ -9,7 +9,7 @@ class App extends Component {
         <Fragment>
           <Route path="/" component={Nav} />
           <div className="container">
-            <Route path="/add-ticket" component={AddTicketForm} />
+            <Route path="/add-ticket" component={AddTicket} />
           </div>
         </Fragment>
       </Router>
