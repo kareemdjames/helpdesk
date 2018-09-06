@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import { database } from '../../firebase';
 
 class AddTicketForm extends Component {
   constructor() {
@@ -8,10 +9,25 @@ class AddTicketForm extends Component {
 
   handlesubmitEvent(e) {
     e.preventDefault();
-    console.log('Email--' + this.refs.email.value.trim());
-    console.log('Issue Type--' + this.refs.issueType.value.trim());
-    console.log('Department--' + this.refs.department.value.trim());
-    console.log('Comments--' + this.refs.comment.value.trim());
+    let data = {
+      date: Date(),
+      email: this.refs.email.value.trim(),
+      issueType: this.refs.issueType.value.trim(),
+      department: this.refs.department.value.trim(),
+      comments: this.refs.comment.value.trim()
+    };
+
+    // Push data to create new ticket with unique id
+    database
+      .ref()
+      .child('helpdesk')
+      .child('tickets')
+      .push(data);
+
+    // Retrieve update results once data is added
+    database.ref().on('child_added', function(snapshot) {
+      console.log('Ticket submitted successfully');
+    });
   }
 
   render() {
@@ -21,7 +37,7 @@ class AddTicketForm extends Component {
         <br />
         <h2>Add Ticket</h2>
         <hr />
-        <form onSubmit={this.handlesubmitEvent}>
+        <form ref="form" onSubmit={this.handlesubmitEvent}>
           <div className="form-group">
             <label htmlFor="email">
               Email <span style={style}>*</span>
