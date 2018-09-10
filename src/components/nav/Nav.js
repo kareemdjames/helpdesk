@@ -4,6 +4,8 @@ import './Nav.css';
 
 class Nav extends Component {
   render() {
+    let props = this.props;
+    console.log(props);
     return (
       <div
         className="navbar navbar-dark bg-dark navbar-expand-lg"
