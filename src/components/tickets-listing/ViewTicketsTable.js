@@ -18,7 +18,7 @@ class ViewTicketsTable extends Component {
       let newTickets = [];
       for (let ticket in tickets) {
         newTickets.push({
-          id: tickets[ticket],
+          id: ticket,
           email: tickets[ticket].email,
           issueType: tickets[ticket].issueType,
           department: tickets[ticket].department,
