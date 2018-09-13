@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Redirect } from 'react-router-dom';
-import { firebaseApp, facebookProvider } from '../../firebase';
+import { firebaseApp, facebookProvider, googleProvider } from '../../firebase';
 import { ToastDanger } from 'react-toastr-basic';
 import './LoginForm.css';
 
@@ -24,6 +24,26 @@ class LoginForm extends Component {
           console.log('unable to sign in with Facebook');
         } else {
           this.setState({ redirect: true });
+        }
+      })
+      .catch(err => {
+        ToastDanger(err.message);
+      });
+  }
+
+  authWithGoogle() {
+    console.log('google');
+    googleProvider.addScope('profile');
+    googleProvider.addScope('email');
+    firebaseApp
+      .auth()
+      .signInWithPopup(googleProvider)
+      .then((res, err) => {
+        if (err) {
+          console.log('unable to sign in with Google');
+        } else {
+          console.log(res.user);
+          this.setState({ redirect: true, data: res.user });
         }
       })
       .catch(err => {
