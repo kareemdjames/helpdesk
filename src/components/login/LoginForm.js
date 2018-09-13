@@ -13,6 +13,7 @@ class LoginForm extends Component {
     };
     this.authWithFacebook = this.authWithFacebook.bind(this);
     this.authWithGoogle = this.authWithGoogle.bind(this);
+    this.authWithEmailPassword = this.authWithEmailPassword.bind(this);
   }
 
   authWithFacebook() {
@@ -46,6 +47,7 @@ class LoginForm extends Component {
         } else {
           console.log(res.user);
           this.setState({ redirect: true, data: res.user });
+          console.log(this.state.redirect);
         }
       })
       .catch(err => {
@@ -61,7 +63,6 @@ class LoginForm extends Component {
       .auth()
       .fetchSignInMethodsForEmail(email)
       .then(provider => {
-        console.log(provider.indexOf('password'));
         if (provider.length === 0) {
           // Create new user
           firebaseApp.auth().setPersistence('session');
@@ -72,17 +73,20 @@ class LoginForm extends Component {
           this.loginForm.reset();
           ToastDanger('Wrong Password. Please try again!');
         } else {
+          // Sign in user
           return firebaseApp.auth().signInWithEmailAndPassword(email, password);
         }
       })
       .then(user => {
         if (user && user.email) {
-          this.setState({ redirect: true, data: user });
+          console.log('hello');
+          this.setState({ redirect: true });
           this.loginForm.reset();
         }
       })
       .catch(err => {
         console.log(err);
+        console.log('hello1');
         ToastDanger(err.message);
       });
   }
