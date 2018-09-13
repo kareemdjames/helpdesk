@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import './Nav.css';
 
@@ -27,15 +27,25 @@ class Nav extends Component {
         </button>
         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div className="navbar-nav">
-            <Link className="nav-item nav-link active" to="/">
-              Home
-            </Link>
-            <Link className="nav-item nav-link" to="/view-ticket">
-              Tickets
-            </Link>
-            <Link className="nav-item nav-link" to="/add-ticket">
-              Add new ticket
-            </Link>
+            {props.authenticated ? (
+              <Fragment>
+                <Link className="nav-item nav-link active" to="/">
+                  Home
+                </Link>
+                <Link className="nav-item nav-link" to="/view-ticket">
+                  Tickets
+                </Link>
+                <Link className="nav-item nav-link" to="/add-ticket">
+                  Add new ticket
+                </Link>
+              </Fragment>
+            ) : (
+              <Fragment>
+                <Link className="nav-item nav-link" to="/login">
+                  Register/Login
+                </Link>
+              </Fragment>
+            )}
           </div>
         </div>
       </div>
