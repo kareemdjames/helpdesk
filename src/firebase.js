@@ -8,10 +8,10 @@ var config = {
   storageBucket: 'swarf-eb.appspot.com',
   messagingSenderId: '946602163393'
 };
-firebase.initializeApp(config);
 
 export default firebase;
 
+export const firebaseApp = firebase.initializeApp(config);
 export const database = firebase.database();
 export const googleProvider = new firebase.auth.GoogleAuthProvider();
 export const facebookProvider = new firebase.auth.FacebookAuthProvider();
