@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Redirect } from 'react-router-dom';
+import './LoginForm.css';
 
 class LoginForm extends Component {
   constructor() {
