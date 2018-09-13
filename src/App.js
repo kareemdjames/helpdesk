@@ -74,9 +74,3 @@ class App extends Component {
 }
 
 export default App;
-
-{
-  /* <Route path="/" component={Nav} />
-        <Route path="/add-ticket" component={AddTicket} />
-        <Route path="/view-ticket" component={ViewTickets} /> */
-}
