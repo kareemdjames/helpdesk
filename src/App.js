@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import firebase from './firebase';
 import { Nav, AddTicket, ViewTickets, Login, Home } from './components/index';
 
 class App extends Component {
@@ -9,6 +10,27 @@ class App extends Component {
       authenticated: false,
       data: ''
     };
+  }
+
+  componentWillMount() {
+    this.removeAuthListener = firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        console.log('App user data', user);
+        this.setState({
+          authenticated: true,
+          data: user.providerData
+        });
+      } else {
+        this.setState({
+          authenticated: false,
+          data: ''
+        });
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    this.removeAuthListener();
   }
 
   render() {
