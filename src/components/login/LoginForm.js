@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { firebaseApp, facebookProvider, googleProvider } from '../../firebase';
 import { ToastDanger } from 'react-toastr-basic';
@@ -49,6 +49,40 @@ class LoginForm extends Component {
         }
       })
       .catch(err => {
+        ToastDanger(err.message);
+      });
+  }
+
+  authWithEmailPassword(e) {
+    e.preventDefault();
+    const email = this.emailField.value;
+    const password = this.passwordField.value;
+    firebaseApp
+      .auth()
+      .fetchSignInMethodsForEmail(email)
+      .then(provider => {
+        console.log(provider.indexOf('password'));
+        if (provider.length === 0) {
+          // Create new user
+          firebaseApp.auth().setPersistence('session');
+          return firebaseApp
+            .auth()
+            .createUserWithEmailAndPassword(email, password);
+        } else if (provider.indexOf('password') === -1) {
+          this.loginForm.reset();
+          ToastDanger('Wrong Password. Please try again!');
+        } else {
+          return firebaseApp.auth().signInWithEmailAndPassword(email, password);
+        }
+      })
+      .then(user => {
+        if (user && user.email) {
+          this.setState({ redirect: true, data: user });
+          this.loginForm.reset();
+        }
+      })
+      .catch(err => {
+        console.log(err);
         ToastDanger(err.message);
       });
   }
