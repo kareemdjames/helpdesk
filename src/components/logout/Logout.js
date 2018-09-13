@@ -4,14 +4,14 @@ import { firebaseApp } from '../../firebase';
 
 class Logout extends Component {
   constructor(props) {
-    super();
+    super(props);
     this.state = {
       redirect: props.authenticated,
       data: ''
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     firebaseApp
       .auth()
       .signOut()
