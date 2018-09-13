@@ -1,7 +1,15 @@
 import React, { Component, Fragment } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import firebase from './firebase';
-import { Nav, AddTicket, ViewTickets, Login, Home } from './components/index';
+import {
+  Nav,
+  AddTicket,
+  ViewTickets,
+  Login,
+  Home,
+  Logout
+} from './components/index';
+import ToastrContainer from 'react-toastr-basic';
 
 class App extends Component {
   constructor(props) {
@@ -37,10 +45,16 @@ class App extends Component {
     return (
       <Router>
         <div className="container">
+          <ToastrContainer />
+          <Route
+            path="/logout"
+            render={() => <Logout authenticated={this.state.authenticated} />}
+          />
           {this.state.authenticated ? (
             <Fragment>
               <Nav authenticated={this.state.authenticated} />
               <Route
+                exact
                 path="/"
                 render={() => <Home userInfo={this.state.data} />}
               />
@@ -50,7 +64,7 @@ class App extends Component {
           ) : (
             <Fragment>
               <Nav authenticated={this.state.authenticated} />
-              <Route exact path="/login" component={Login} />
+              <Route path="/login" component={Login} />
             </Fragment>
           )}
         </div>
