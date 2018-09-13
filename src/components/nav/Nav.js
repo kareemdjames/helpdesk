@@ -38,6 +38,9 @@ class Nav extends Component {
                 <Link className="nav-item nav-link" to="/add-ticket">
                   Add new ticket
                 </Link>
+                <Link className="nav-item nav-link" to="/logout">
+                  Logout
+                </Link>
               </Fragment>
             ) : (
               <Fragment>
