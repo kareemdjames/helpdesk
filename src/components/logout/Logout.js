@@ -1,10 +1,10 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { firebaseApp } from '../../firebase';
 
 class Logout extends Component {
   constructor(props) {
-    super(props);
+    super();
     this.state = {
       redirect: props.authenticated,
       data: ''
