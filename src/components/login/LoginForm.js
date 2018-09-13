@@ -12,6 +12,7 @@ class LoginForm extends Component {
       data: null
     };
     this.authWithFacebook = this.authWithFacebook.bind(this);
+    this.authWithGoogle = this.authWithGoogle.bind(this);
   }
 
   authWithFacebook() {
@@ -23,7 +24,8 @@ class LoginForm extends Component {
         if (err) {
           console.log('unable to sign in with Facebook');
         } else {
-          this.setState({ redirect: true });
+          console.log(res.user);
+          this.setState({ redirect: true, data: res.user });
         }
       })
       .catch(err => {
