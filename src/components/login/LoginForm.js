@@ -1,13 +1,34 @@
 import React, { Component, Fragment } from 'react';
 import { Redirect } from 'react-router-dom';
+import { firebaseApp, facebookProvider } from '../../firebase';
+import { ToastDanger } from 'react-toastr-basic';
 import './LoginForm.css';
 
 class LoginForm extends Component {
   constructor() {
     super();
     this.state = {
-      redirect: false
+      redirect: false,
+      data: null
     };
+    this.authWithFacebook = this.authWithFacebook.bind(this);
+  }
+
+  authWithFacebook() {
+    console.log('facebook');
+    firebaseApp
+      .auth()
+      .signInWithPopup(facebookProvider)
+      .then((res, err) => {
+        if (err) {
+          console.log('unable to sign in with Facebook');
+        } else {
+          this.setState({ redirect: true });
+        }
+      })
+      .catch(err => {
+        ToastDanger(err.message);
+      });
   }
 
   render() {
